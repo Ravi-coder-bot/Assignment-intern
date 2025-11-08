@@ -149,8 +149,6 @@ System-wide Git config is stored at:
 
 C:\Program Files\Git\etc\gitconfig
 
-icacls and attrib are powerful for applying ACL restrictions.
-
 Proper user role separation ensures source integrity and secure development practices.
 
 🏁 Conclusion
