@@ -15,6 +15,7 @@ Run the following command in **Command Prompt (Admin)**:
 ```cmd
 net user developer Developer@123 /add
 Creates a standard (non-admin) developer account.
+```
 
 <img width="415" src="https://github.com/user-attachments/assets/31378ce3-c19f-4842-8b95-8a23f3b4466e" /> <img width="416" src="https://github.com/user-attachments/assets/691158be-80da-476d-b438-c7d6af209fb5" />
 2️⃣ Log in as Developer
@@ -24,56 +25,62 @@ Log out of the administrator account and log in using the newly created develope
 3️⃣ Check Git Installation
 Open Command Prompt (as developer) and verify Git installation:
 
-cmd
+```cmd
 Copy code
 git --version
+```
 <img width="333" src="https://github.com/user-attachments/assets/433a6e07-ccf1-4541-a478-a8b8015bd189" />
 4️⃣ Create Project Directory
 Create a working repo folder:
 
-cmd
+```cmd
 Copy code
 mkdir C:\Repos\SampleRepo
 cd C:\Repos\SampleRepo
+```
 5️⃣ Open Project in VS Code
 Open the folder in Visual Studio Code:
 
-cmd
+```cmd
 Copy code
 code .
+```
 <img width="358" src="https://github.com/user-attachments/assets/38fc5776-72e6-4da5-8540-c0d59c470818" />
 6️⃣ Secure System Git Configuration
 Switch back to Administrator mode and execute:
 
-cmd
+```cmd
 Copy code
 icacls "C:\Program Files\Git\etc\gitconfig" /inheritance:r
 icacls "C:\Program Files\Git\etc\gitconfig" /grant "Administrators:F" "SYSTEM:F"
 icacls "C:\Program Files\Git\etc\gitconfig" /remove "Users"
 attrib +R "C:\Program Files\Git\etc\gitconfig"
+```
 These commands remove user modification rights and make the Git system config file read-only.
 
 <img width="416" src="https://github.com/user-attachments/assets/a07ce46c-4780-44c0-ac26-b1833fe48b37" />
 7️⃣ Verify Git Identity
 Switch back to the developer account and run:
 
-cmd
+```cmd
 Copy code
 git config --list --show-origin
+```
 It should display:
 
 pgsql
-Copy code
+```cmd
 system  C:\Program Files\Git\etc\gitconfig   user.name=Ravinder
 system  C:\Program Files\Git\etc\gitconfig   user.email=ravibeniwal931@gmail.com
+```
 <img width="415" src="https://github.com/user-attachments/assets/8a241998-f597-4ce1-bbdc-44b987c9edc7" />
 8️⃣ Test Security — Attempt Unauthorized Edits
 Try to modify Git identity:
 
-c
-Copy code
+```cmd
 git config --global user.name "newUser"
 git config --global user.email "newUser@example.com"
+```
 Expected:
 
 Permission denied ❌
@@ -92,10 +99,10 @@ Error such as Access Denied or file opens as read-only.
 🔟 Validate Commit Behavior
 Create or edit a test file, then run:
 
-cmd
-Copy code
+```cmd
 git add .
 git commit -m "test commit"
+```
 Result: Permission denied — commit cannot override protected Git identity.
 
 <img width="415" src="https://github.com/user-attachments/assets/a33f3e27-2a70-4ffa-8923-c4c75bf4b9af" /> <img width="963" src="https://github.com/user-attachments/assets/6ba9b272-531d-4b0f-84d4-561fb52c3adb" />
